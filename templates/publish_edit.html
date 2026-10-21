@@ -1,0 +1,11 @@
+{% extends 'home.html' %}
+
+
+{% block content %}
+    <h3>出版社编辑</h3>
+    <form action="" method="post">
+         <p>出版社名字: <input type="text" name="name" value="{{ publish_obj.name }}"></p>
+        <p>出版社地址: <input type="text" name="addr" value="{{ publish_obj.addr }}"></p>
+        <input type="submit" class="btn btn-primary">
+    </form>
+{% endblock %}

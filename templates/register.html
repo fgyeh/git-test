@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'bootstrap-3.4.1-dist/css/bootstrap.min.css' %}">
+    <script src="{% static 'js/jquery-3.7.1.min.js' %}"></script>
+    <script src="{% static 'bootstrap-3.4.1-dist/js/bootstrap.min.js' %}"></script>
+</head>
+<body>
+<h3>注册</h3>
+<form action="" method="post">
+    <p>用户名: <input type="text" name="username"></p>
+    <p>密码: <input type="text" name="password"></p>
+    <p>确认密码: <input type="text" name="re_password"></p>
+    <input type="submit">
+</form>
+</body>
+</html>

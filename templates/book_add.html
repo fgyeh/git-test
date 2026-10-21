@@ -1,0 +1,26 @@
+{% extends 'home.html' %}
+
+{% block content %}
+	<h3>添加图书</h3>
+    <form action="" method="post">
+        <p>书名: <input type="text" name="title"></p>
+        <p>价格: <input type="text" name="price"></p>
+        <p>出版日期: <input type="date" name="date"></p>
+        <p>出版社: 
+            <!--循环遍历出版社列表获取到出版社对象,传递给后端的实际值是出版社的id, 
+            展示给用户看的是出版社的名字
+            -->
+            {% for publish_obj in publish_queryset %}
+                <input type="radio" name="publish_id" 
+                       value="{{ publish_obj.id }}">{{ publish_obj.name }}
+            {% endfor %}
+        </p>
+        <p>作者: 
+            {% for author_obj in author_queryset %}
+                <input type="checkbox" name="author" 
+                       value="{{ author_obj.id }}">{{ author_obj.name }}
+            {% endfor %}
+        </p>
+        <input type="submit" value="添加" class="btn btn-primary">
+    </form>
+{% endblock %}
