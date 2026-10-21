@@ -1,0 +1,42 @@
+{% extends 'home.html' %}
+
+{% block content %}
+	<h3>编辑图书</h3>
+    <form action="" method="post">
+        <p>书名: <input type="text" name="title" value="{{ book_obj.title }}"></p>
+        <p>价格: <input type="text" name="price" value="{{ book_obj.price }}"></p>
+        <p>出版社: 
+            {% for publish_obj in publish_queryset %}
+                <!--
+                    循环遍历所有的出版社对象,
+                    判断当前要编辑的书对象的出版社是不是当前遍历的出版社
+                    如果是的话,加上checked属性让radio框默认选中
+                -->
+                {% if book_obj.publish == publish_obj %}
+                	<input type="radio" name="publish_id" checked
+                       value="{{ publish_obj.id }}">{{ publish_obj.name }}
+                {% else %}
+                    <input type="radio" name="publish_id" 
+                       value="{{ publish_obj.id }}">{{ publish_obj.name }}
+                {% endif %}
+            {% endfor %}
+        </p>
+        <p>作者:
+            {% for author_obj in author_queryset %}
+                <!--
+                    循环遍历所有的作者对象
+                    判断当前作者是否在书对象作者列表中
+                    如果是,就加上checked属性默认选中
+                -->
+                {% if author_obj in book_obj.authors.all %}
+                	<input type="checkbox" name="author" checked
+                       value="{{ author_obj.id }}">{{ author_obj.name }}
+                {% else %}
+                    <input type="checkbox" name="author" 
+                       value="{{ author_obj.id }}">{{ author_obj.name }}
+                {% endif %}
+            {% endfor %}
+        </p>
+        <input type="submit" value="编辑" class="btn btn-primary">
+    </form>
+{% endblock %}

@@ -1,0 +1,53 @@
+{% extends 'home.html' %}
+
+{% block content %}
+    <a href="{% url 'author_add' %}" class="btn btn-success">添加</a>
+	<table class="table">
+        <thead>
+            <tr>
+                <th>id</th>
+                <th>名字</th>
+                <th>年龄</th>
+                <th>邮箱</th>
+                <th>地址</th>
+                <th>手机号</th>
+                <th>操作</th>
+                <th>操作</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for author_obj in author_queryset %}
+            	<tr>
+                    <td>{{ author_obj.id }}</td>
+                    <td>{{ author_obj.name }}</td>
+                    <td>{{ author_obj.age }}</td>
+                    <td>{{ author_obj.email }}</td>
+                    <td>{{ author_obj.author_detail.addr }}</td>
+                    <td>{{ author_obj.author_detail.phone }}</td>
+                    <td><a href="{% url 'author_edit' author_obj.id %}" class="btn btn-primary btn-xs">编辑</a></td>
+                    <td><a href="{% url 'author_delete' author_obj.id %}" class="btn btn-danger btn-xs is_delete">删除</a></td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
+
+
+{% block js %}
+    <script>
+        // 给含有is_delete类的标签绑定点击事件
+        $('.is_delete').click(function (){
+            let res = confirm('是否删除?');
+            if(res){
+                // $:jquery操作,能够将标签对象转换成jquery对象
+                // this:或者正在操作的标签对象,标签对象只能调用js的方法
+                // attr('属性'):jquery方法,获取标签某个属性的值
+                // attr('属性', '值'):给标签某个属性传值
+                window.location = $(this).attr('href')
+                // window.location = author/delete/作者id
+            }else{
+                return false
+            }
+        })
+    </script>
+{% endblock %}
